@@ -23,3 +23,12 @@ Tasks:
 3: Clean the data: remove bad records
 4: Transfer data to PostGres DB for review with a note 
 that explains what we did and why.
+
+
+Relationships:
+
+Here is the SQL to combine the tables and have just the columns we need:
+
+SELECT InvDetails.InvoiceDetailID, Invoices.InvoiceID, Merchandise.ProductID, InvDetails.ProductPrice, InvDetails.ItemCost, InvDetails.ConsignorID, Merchandise.ProductDescription, Invoices.InvoiceDate
+FROM Merchandise INNER JOIN (Invoices INNER JOIN InvDetails ON Invoices.InvoiceID = InvDetails.InvoiceID) ON Merchandise.ProductID = InvDetails.ProductID
+Order by invoices.invoiceDate;
