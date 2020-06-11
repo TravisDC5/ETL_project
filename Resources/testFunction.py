@@ -3,7 +3,6 @@ import pandas as pd
 filelink = "peter.CSV"
 database = pd.read_csv(filelink)
 
-#print(database)
 
 def querysearch(startdate, enddate, dataframe = database):
     aquired_df = dataframe[dataframe['invoicedate'] >= startdate]
@@ -11,4 +10,7 @@ def querysearch(startdate, enddate, dataframe = database):
 
     return(print(aquired_df2))
 
-querysearch("2019-08-01", "2019-08-31")
+#querysearch("2019-08-01", "2019-08-31")
+
+startdate = input(f'')
+enddate = input(f'')
