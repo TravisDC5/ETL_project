@@ -1,3 +1,15 @@
+In the beginning we created 4 tables from Access (CSV or Direct from SQLALCHEMY) from a local database in our “query.sql” and extracted the table names from Access into a new CSV/Excel file called “Peter”.
+Although our group completed the project guidelines given by Eric Leung, we added additional information to broaden the scope and concept.
+Instead of have the final result as an CSV/Excel file, we needed to export the tables into Pandas and transfer the data to a Postgres DB. Our group ran into multiple hurdles and had to start from scratch.
+Extract:
+We exported the required tables we created from Access Into Pandas (InvDetails.InvoiceDetailID, Invoices.InvoiceID, Merchandise.ProductID, etc.) and constructed an engine to connect the data base.
+Transform:
+We grabbed the table from the “Peter” and store a SQL Query into Pandas Dataframe. We cleaned the data by removing certain fields using a querysearch (productdescription, itemcost, cosignorid, etc). This way helps reading the data easier where it is concise and straight to the point.
+Load:
+After cleaning up the data and coding, we transfer data to PostGres DB in a table name “results”
+Although we only a limited timeline to complete the task, adding an additional month and year filter would help the end user to look up additional dates instead of looking at one specific date given on our code.
+
+
 # ETL_project
 Extract - Transform - Load
 Access:
