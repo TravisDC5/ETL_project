@@ -1,51 +1,38 @@
-In the beginning we created 4 tables from Access (CSV or Direct from SQLALCHEMY) from a local database in our “query.sql” and extracted the table names from Access into a new CSV/Excel file called “Peter”.
-Although our group completed the project guidelines given by Eric Leung, we added additional information to broaden the scope and concept.
-Instead of have the final result as an CSV/Excel file, we needed to export the tables into Pandas and transfer the data to a Postgres DB. Our group ran into multiple hurdles and had to start from scratch.
-Extract:
-We exported the required tables we created from Access Into Pandas (InvDetails.InvoiceDetailID, Invoices.InvoiceID, Merchandise.ProductID, etc.) and constructed an engine to connect the data base.
-Transform:
-We grabbed the table from the “Peter” and store a SQL Query into Pandas Dataframe. We cleaned the data by removing certain fields using a querysearch (productdescription, itemcost, cosignorid, etc). This way helps reading the data easier where it is concise and straight to the point.
-Load:
-After cleaning up the data and coding, we transfer data to PostGres DB in a table name “results”
-Although we only a limited timeline to complete the task, adding an additional month and year filter would help the end user to look up additional dates instead of looking at one specific date given on our code.
+ETL Project	06-13-2020
 
+Participants:
+David Tracy
+Jon Wolgamott
+Travis Christensen
+Peter Nguyen
 
-# ETL_project
-Extract - Transform - Load
-Access:
-Store Sales
-	Invoices
-	InvDetails
-	Merchandise
-	
+Objective: 
+Demonstrate the Extract, Transform and Load of data from more than one source.
 
-These tie together to make a sales and inventory record.
+Description:
+We elected to use active client data from a local business.
 
-Vendor2020 
-	Booth is the space number/name
-	CP# ties back to the sales records as consignorid
-	Rent is what they are assessed against their sales each month.
+Vendor Phone Numbers and Email’s were removed from the data.
 
+Our aim was to Extract the data from it’s database location and supporting flat files, Transform the data by removing records that were either testing rows/transactions, zero value merchandise, and store owned inventory sales. Only Vendor/Consigned merchandise sales were used in the process. The result would be the total sales revenue due the vendor minus the space rent the vendor owed for their booth.
 
-Show the sales in a given month by vendor
-Subtract the Rent
-Record the amount owing the vendor or the store.
+Begin Extract
+The following tables were created in Postgress, and populated with data from the store datafiles.
+merchandise
+invdetails
+invoices
+vendors
+SQL was used to join these tables and this would represent the Extract portion of the project.
+End Extract
 
+Begin Transform
+These tables were imported into a Pandas dataframe, and the bad rows were removed.
+In the same function, the aggregation of the data and the math to deduct the rent was completed.
+A rounding function was embedded to limit the number of decimals to 2.
+End Transform
 
-Tasks:
-Extract
-1: export the requied tables from Access and Excel as CSV files
-   into PGAdmin.
-2: Import the data into Pandas. 
-
-Transform:
-3: Clean the data: remove bad records
-	0 value item cost.
-	Test records
-	Store owned activity (consignorid = 500)
-4: Add up the item cost values by consignor name
-	Subtract the booth rent
-	Record the margin to be paid to the vendor.
-Load:
-5. Load the data into a results table in Postgres 
+Begin Load
+A new table called “results” was created in the existing database and the results were written.
+Vendor Name : Total Revenue : Rent : Margin (due the vendor, or negative values were due the store.
+End Load
 
