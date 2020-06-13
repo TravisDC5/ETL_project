@@ -119,10 +119,21 @@ CREATE TABLE vendors(
      Booth VARCHAR,
      CP DECIMAL,
      VendorName VARCHAR,
-     Rent VARCHAR
+     Rent DECIMAL
 );
 
---Extract
-SELECT InvDetails.InvoiceDetailID, Invoices.InvoiceID, Merchandise.ProductID, InvDetails.ProductPrice, InvDetails.ItemCost, InvDetails.ConsignorID, Merchandise.ProductDescription, Invoices.InvoiceDate FROM Merchandise INNER JOIN (Invoices INNER JOIN InvDetails ON Invoices.InvoiceID = InvDetails.InvoiceID) ON Merchandise.ProductID = InvDetails.ProductID Order by invoices.invoiceDate;
+CREATE TABLE peter AS
+SELECT Invoices.InvoiceID, InvDetails.InvoiceDetailID, InvDetails.ProductID, InvDetails.ProductPrice, InvDetails.ItemCost, 
+	   InvDetails.ConsignorID, Invoices.InvoiceDate, Merchandise.ProductType, Merchandise.ProductColor, Merchandise.ProductSize, 
+	   Merchandise.ProductDescription, Merchandise.Return, Merchandise.AuctionID, Merchandise.ItemCount, vendors.cp, 
+	   vendors.rent, vendors.vendorname
+FROM vendors 
+	INNER JOIN (Invoices 
+        INNER JOIN (Merchandise 
+	INNER JOIN InvDetails ON Merchandise.ProductID = InvDetails.ProductID) 
+	                      ON Invoices.InvoiceID = InvDetails.InvoiceID) 
+			      ON vendors.cp = InvDetails.ConsignorID;
+												  
+SELECT * FROM results;
 
---Transform
+
