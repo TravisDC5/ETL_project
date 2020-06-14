@@ -1,9 +1,9 @@
 # ETL Project
 
 ## Participants:
-David Tracy
-Jon Wolgamott
-Travis Christensen
+David Tracy \n
+Jon Wolgamott \n
+Travis Christensen \n
 Peter Nguyen
 
 ## Objective:
